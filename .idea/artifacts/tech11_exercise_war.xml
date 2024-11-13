@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="tech11_exercise:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>tech11_exercise</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="tech11_exercise-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="tech11_exercise:war exploded" />
+    </root>
+  </artifact>
+</component>
