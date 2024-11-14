@@ -19,6 +19,7 @@ public class User {
     @NotNull(message = "Birthday is required")
     private String birthday;
 
+    //a length or format constraint would also be possible here
     @NotNull(message = "Password is required")
     private String password;
 

@@ -1,5 +1,6 @@
 package com.example.tech11_exercise;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,8 @@ public class UserStorage {
     }
 
     //for testing only
-    public Collection<User> getAllUsers() {
-        return users.values();
+    public ArrayList<User> getAllUsers() {
+        return new ArrayList<>(users.values());
     }
 
 }
