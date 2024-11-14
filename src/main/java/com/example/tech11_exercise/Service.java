@@ -54,15 +54,8 @@ public class Service {
                     .entity("User not found.")
                     .build();
         }
-        //userStorage.deleteUser(existingUser);
-        //userStorage.addUser(updatedUser);
-
-        existingUser.setFirstname(updatedUser.getFirstname());
-        existingUser.setLastname(updatedUser.getLastname());
-        existingUser.setEmail(updatedUser.getEmail());
-        existingUser.setBirthday(updatedUser.getBirthday());
-        existingUser.setPassword(updatedUser.getPassword());
-
+        userStorage.deleteUser(existingUser);
+        userStorage.addUser(updatedUser);
         return Response.status(Response.Status.OK).entity(updatedUser).build();
     }
 
