@@ -1,26 +1,22 @@
 package com.example.tech11_exercise;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 public class User {
 
-    @NotNull(message = "First name is required")
+    //@NotBlank(message = "First name is required")
     private String firstname;
 
-    @NotNull(message = "Last name is required")
+    //@NotBlank(message = "Last name is required")
     private String lastname;
 
-    @NotNull(message = "Email is required")
-    @Email(message = "Email should be valid")
+    //@NotBlank(message = "Email is required")
+    //@Email(message = "Invalid Email")
     private String email;
 
-    @NotNull(message = "Birthday is required")
+    //@NotBlank(message = "Birthday is required")
     private String birthday;
 
     //a length or format constraint would also be possible here
-    @NotNull(message = "Password is required")
+    //@NotBlank(message = "Password is required")
     private String password;
 
     public User(String firstname, String lastname, String email, String birthday, String password) {
@@ -34,9 +30,31 @@ public class User {
     public User() {
     }
 
-//    public boolean isValidUser(User user) {
-//        return firstname != null && lastname != null && email != null && birthday != null && password != null;
-//    }
+    public boolean checkAttributes() {
+        System.out.println(this.toString());
+
+        // Check for null, empty or only whitespace string
+        if (firstname == null || firstname.trim().isEmpty()) return false;
+        if (lastname == null || lastname.trim().isEmpty()) return false;
+        if (email == null || email.trim().isEmpty()) return false;
+        if (birthday == null || birthday.trim().isEmpty()) return false;
+        if (password == null || password.trim().isEmpty()) return false;
+
+
+        // valid birthday format (yyyy-MM-dd)
+        if (!birthday.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+            System.out.println("birthday");
+            return false;
+        }
+        if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            System.out.println("email");
+            return false;
+        }
+
+        System.out.println("returning true");
+
+        return true;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -76,6 +94,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+               "firstname='" + firstname + '\'' +
+               ", lastname='" + lastname + '\'' +
+               ", email='" + email + '\'' +
+               ", birthday='" + birthday + '\'' +
+               ", password='" + password + '\'' +
+               '}';
     }
 
 }

@@ -1,10 +1,13 @@
 package com.example.tech11_exercise;
 
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+
+
+//I ran into some trouble when trying to get the bean validation to work on my Tomcat Server so the "isValidUser(...)" method is used for validating the JSON
+// data instead.
 
 @Path("/users")
 public class Service {
@@ -29,7 +32,12 @@ public class Service {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addUser(@Valid User user) {
+    public Response addUser(User user) {
+        if (!user.checkAttributes()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Invalid user data. Ensure all fields are correctly filled.")
+                    .build();
+        }
         if (userStorage.getUser(user.getEmail()) != null) {
             return Response.status(Response.Status.FORBIDDEN)
                     .entity("User with this email already exists.")
@@ -47,7 +55,13 @@ public class Service {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateUser(@Valid User updatedUser, @QueryParam("email") final String currentEmail) {
+    public Response updateUser(User updatedUser, @QueryParam("email") final String currentEmail) {
+        if (!updatedUser.checkAttributes()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Invalid user data. Ensure all fields are correctly filled.")
+                    .build();
+        }
+
         User existingUser = userStorage.getUser(currentEmail);
         if (existingUser == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -93,5 +107,4 @@ public class Service {
 
         return Response.status(Response.Status.OK).entity(allUsers).build();
     }
-
 }

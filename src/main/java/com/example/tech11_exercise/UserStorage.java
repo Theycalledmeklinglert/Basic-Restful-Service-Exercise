@@ -41,5 +41,13 @@ public class UserStorage {
     public ArrayList<User> getAllUsers() {
         return new ArrayList<>(users.values());
     }
+    //for testing only
+    public void clearStorage() {
+        users.clear();
+    }
+    public static void resetInstance() {
+        instance = null;
+    }
+
 
 }
