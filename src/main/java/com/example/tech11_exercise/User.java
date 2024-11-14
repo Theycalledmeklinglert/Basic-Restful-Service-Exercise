@@ -31,8 +31,6 @@ public class User {
     }
 
     public boolean checkAttributes() {
-        System.out.println(this.toString());
-
         // Check for null, empty or only whitespace string
         if (firstname == null || firstname.trim().isEmpty()) return false;
         if (lastname == null || lastname.trim().isEmpty()) return false;
@@ -40,19 +38,13 @@ public class User {
         if (birthday == null || birthday.trim().isEmpty()) return false;
         if (password == null || password.trim().isEmpty()) return false;
 
-
         // valid birthday format (yyyy-MM-dd)
         if (!birthday.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-            System.out.println("birthday");
             return false;
         }
         if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            System.out.println("email");
             return false;
         }
-
-        System.out.println("returning true");
-
         return true;
     }
 
