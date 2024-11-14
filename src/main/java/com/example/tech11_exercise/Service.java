@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 
-//I ran into some trouble when trying to get the bean validation to work on my Tomcat Server so the "isValidUser(...)" method is used for validating the JSON
+//I ran into some trouble when trying to get the bean validation to work on my Tomcat Server so the "checkAttributes(...)" method is used for validating the JSON
 // data instead.
 
 @Path("/users")
@@ -26,7 +26,6 @@ public class Service {
 
         return Response.status(Response.Status.OK).entity(user).build();
     }
-
 
     // The user password is stored in plain text which is of course a cardinal sin in real world use cases. However for the purpose of this exercise it should suffice.
     @POST

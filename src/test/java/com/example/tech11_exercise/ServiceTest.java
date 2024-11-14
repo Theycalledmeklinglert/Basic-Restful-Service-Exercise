@@ -1,6 +1,5 @@
 package com.example.tech11_exercise;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,12 +34,11 @@ public class ServiceTest {
         assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus());
         assertEquals(user.getEmail(), response.readEntity(User.class).getEmail());
 
-        response = client.target(BASE_URL)
+        client.target(BASE_URL)
                 .queryParam("email", user.getEmail())
                 .queryParam("password", user.getPassword())
                 .request()
                 .delete();
-
     }
 
     @Test
